@@ -6,7 +6,7 @@ export const supportedEndpoints = ['total']
 
 export const inputParameters: InputParameters = {}
 
-export interface GoldCoinBalance {
+export interface SuperMarioCoinBalance {
   address: string
   balance: number
 }
@@ -27,7 +27,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
 
   const response = await Requester.request(options)
   response.data.result = {
-    total: response.data.reduce((prev: number, curr: GoldCoinBalance) => {
+    total: response.data.reduce((prev: number, curr: SuperMarioCoinBalance) => {
       return prev + curr.balance
     }, 0),
   }

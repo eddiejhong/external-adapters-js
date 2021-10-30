@@ -1,37 +1,26 @@
-# Chainlink External Adapter for Supermariocoin
+# Chainlink External Adapter for SuperMarioCoin
 
-A template to be used as an example for new [External Adapters](https://github.com/smartcontractkit/external-adapters-js)
-
-(please fill out with corresponding information)
-
-An example adapter description
+This adapter fetches data related to existing SuperMarioCoin addresses.
 
 ### Environment Variables
 
-| Required? |  Name   |                                                        Description                                                         | Options | Defaults to |
-| :-------: | :-----: | :------------------------------------------------------------------------------------------------------------------------: | :-----: | :---------: |
-|           | API_KEY | An API key that can be obtained from the data provider's dashboard (add a ✅ in `Required?` if this parameter is required) |         |             |
+| Required? |  Name   |                                                                                                Description                                                                                                 | Options | Defaults to |
+| :-------: | :-----: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----: | :---------: |
+|           | API_KEY | **Currently, this external adapter uses mock data from a hardcoded endpoint.** An API key that can be obtained from the data provider's dashboard (add a ✅ in `Required?` if this parameter is required). |         |             |
 
 ---
 
 ### Input Parameters
 
-| Required? |   Name   |     Description     |               Options               | Defaults to |
-| :-------: | :------: | :-----------------: | :---------------------------------: | :---------: |
-|           | endpoint | The endpoint to use | [example](#Supermariocoin-Endpoint) |   example   |
+| Required? |   Name   |     Description     |                         Options                         | Defaults to |
+| :-------: | :------: | :-----------------: | :-----------------------------------------------------: | :---------: |
+|           | endpoint | The endpoint to use | [total](#Total-Endpoint), [highlow](#High-Low-Endpoint) |    total    |
 
 ---
 
-## Supermariocoin Endpoint
+## Total Endpoint
 
-An example endpoint description
-
-### Input Params
-
-| Required? |            Name            |               Description                |       Options       | Defaults to |
-| :-------: | :------------------------: | :--------------------------------------: | :-----------------: | :---------: |
-|    ✅     | `base`, `from`, or `coin`  |   The symbol of the currency to query    | `BTC`, `ETH`, `USD` |             |
-|    ✅     | `quote`, `to`, or `market` | The symbol of the currency to convert to | `BTC`, `ETH`, `USD` |             |
+The Total Endpoint returns the sum of all SuperMarioCoin account balances. This endpoint accepts no inputs.
 
 ### Sample Input
 
@@ -39,8 +28,7 @@ An example endpoint description
 {
   "id": "1",
   "data": {
-    "base": "ETH",
-    "quote": "USD"
+    "endpoint": "total"
   }
 }
 ```
@@ -49,11 +37,40 @@ An example endpoint description
 
 ```json
 {
-  "jobRunID": "278c97ffadb54a5bbb93cfec5f7b5503",
+    "jobRunID": "1",
+    "result": {
+        "total": 462122230678539
+    },
+    "statusCode": 200,
+    "data": [...]
+}
+```
+
+## High Low Endpoint
+
+The High Low Endpoint returns the addresses of the accounts with the highest and lowest SuperMarioCoin balances. This endpoint accepts no inputs.
+
+### Sample Input
+
+```json
+{
+  "id": "1",
   "data": {
-    "price": 77777.77,
-    "result": 77777.77
-  },
-  "statusCode": 200
+    "endpoint": "highlow"
+  }
+}
+```
+
+### Sample Output
+
+```json
+{
+    "jobRunID": "1",
+    "result": {
+        "highestBalanceAddress": "1MejgD79BrWdMzFVuF9JxRC1sXury17LUp",
+        "lowestBalanceAddress": "15XPFnJAjPiyTi59BexgHpQBMsA9xzjNn9"
+    },
+    "statusCode": 200,
+    "data": [...]
 }
 ```
